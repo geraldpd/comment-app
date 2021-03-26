@@ -18,7 +18,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $comments = Comment::isParent()->with(['children.children'])->latest()->get();
+        $comments = CommentResource::collection(
+            Comment::isParent()->with(['children.children'])->latest()->get()
+        );
 
         return response($comments, Response::HTTP_OK);
     }
